@@ -16,7 +16,6 @@ const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
         if (err || !user) {
             return res.sendStatus(403);
         }
-
         next();
     });
 };

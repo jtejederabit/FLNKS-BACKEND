@@ -4,8 +4,9 @@ import {financialDataStore, IFinancialPosition} from '../database/nedb';
 const router: Router = Router();
 
 router.get('/getTotalInvestmentAmount', (req, res) => {
-    financialDataStore.find({}).exec(function (err: Error | null, docs: IFinancialPosition[]) {
+    financialDataStore.find({},(err: Error | null, docs: IFinancialPosition[]) => {
         if (err) {
+            console.log("err -> ", err)
             return res.status(500).json({ message: "Internal server error" });
         }
 
@@ -16,7 +17,7 @@ router.get('/getTotalInvestmentAmount', (req, res) => {
 });
 
 router.get('/getTotalInvestments', (req, res) => {
-    financialDataStore.find({}).exec(function (err: Error | null, docs: IFinancialPosition[]) {
+    financialDataStore.find({}, (err: Error | null, docs: IFinancialPosition[])  =>{
         if (err) {
             return res.status(500).json({ message: "Internal server error" });
         }
@@ -26,7 +27,7 @@ router.get('/getTotalInvestments', (req, res) => {
 });
 
 router.get('/getAllInvestments', (req, res) => {
-    financialDataStore.find({}).exec(function (err: Error | null, docs: IFinancialPosition[]) {
+    financialDataStore.find({}, (err: Error | null, docs: IFinancialPosition[]) => {
         if (err) {
             return res.status(500).json({ message: "Internal server error" });
         }
@@ -36,8 +37,9 @@ router.get('/getAllInvestments', (req, res) => {
 });
 
 router.get('/getSummary', (req, res) => {
-    financialDataStore.find({}).exec(function (err: Error | null, docs: IFinancialPosition[]) {
+    financialDataStore.find({}, (err: Error | null, docs: IFinancialPosition[]) => {
         if (err) {
+            console.log("Err ", err)
             return res.status(500).json({ message: "Internal server error" });
         }
 
