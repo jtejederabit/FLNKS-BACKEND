@@ -1,7 +1,7 @@
 import request from 'supertest';
 import bcrypt from 'bcryptjs';
-import app from '../../src/app';
 import { usersDataStore } from '../../src/database/nedb';
+import server from "../../server";
 
 const mockUser = { id: '1', username: 'testUser', password: 'testPassword', email: 'testUser@test.com'}
 
@@ -22,6 +22,13 @@ jest.mock('jsonwebtoken', () => ({
 process.env.JWT_SECRET = process.env.JWT_SECRET || 'testSecret'; // Set a mock JWT secret for testing
 
 describe('/login', () => {
+    beforeEach(() => {
+        jest.clearAllMocks();
+    })
+    afterAll((done) => {
+        server.close(done);
+    })
+
     it('should authenticate successfully with valid credentials', async () => {
         (usersDataStore.findOne as jest.Mock).mockImplementation((query, callback) => {
             callback(null, mockUser);
@@ -29,7 +36,7 @@ describe('/login', () => {
 
         (bcrypt.compareSync as jest.Mock).mockReturnValue(true);
 
-        const response = await request(app)
+        const response = await request(server)
             .post('/login')
             .send({ username: 'testUser', password: 'testPassword' });
 
@@ -47,7 +54,7 @@ describe('/login', () => {
             callback(null, null);
         });
 
-        const response = await request(app)
+        const response = await request(server)
             .post('/login')
             .send({ username: 'fakeUser', password: 'testPassword' });
 
@@ -62,7 +69,7 @@ describe('/login', () => {
 
         (bcrypt.compareSync as jest.Mock).mockReturnValue(false);
 
-        const response = await request(app)
+        const response = await request(server)
             .post('/login')
             .send({ username: 'testUser', password: 'fakePassword' });
 
