@@ -1,8 +1,10 @@
-const app = require('./src/app');
+import app from './src/app';
+import http from 'http';
 
-const port = process.env.PORT || 3000;
-const server = app.listen(port, () => {
-    console.log(`Server listening on port ${port}`);
+const server = http.createServer(app);
+
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+    console.log(`Server listening on port ${PORT}`);
 });
-
-module.exports = server;
+export default server;

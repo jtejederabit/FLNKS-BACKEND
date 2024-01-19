@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production npm run build && npm run copy-database && node dist/src/app.js",
+    "start": "cross-env NODE_ENV=production npm run build && npm run copy-database && node dist/server.js",
     "start:dev": "cross-env NODE_ENV=development npx nodemon",
-    "build": "rimraf ./build && tsc",
+    "build": "rimraf ./dist && npx tsc",
     "copy-database": "cp ./src/database/*.db ./dist/src/database/",
-    "test": "cross-env NODE_ENV=test jest --runInBand --detectOpenHandles --forceExit"
+    "test": "cross-env NODE_ENV=test jest --runInBand"
   },
   "author": "Jonathan Tejedera Neri",
   "license": "ISC",
