@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run build && npm run copy-database && cp .env.production ./dist/src/ && cross-env NODE_ENV=production node dist/server.js",
     "start:dev": "cross-env NODE_ENV=development npx nodemon",
-    "build": "rimraf ./dist && npx tsc",
+    "build": "rimraf ./dist && tsc",
     "copy-database": "cp ./src/database/*.db ./dist/src/database/",
     "test": "cross-env NODE_ENV=test jest --runInBand"
   },
