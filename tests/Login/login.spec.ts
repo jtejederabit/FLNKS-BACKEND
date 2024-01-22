@@ -19,7 +19,7 @@ jest.mock('jsonwebtoken', () => ({
     sign: jest.fn().mockReturnValue('testToken')
 }));
 
-process.env.JWT_SECRET = process.env.JWT_SECRET || 'testSecret'; // Set a mock JWT secret for testing
+process.env.JWT_SECRET = process.env.JWT_SECRET || 'testSecret';
 
 describe('/login', () => {
     beforeEach(() => {
