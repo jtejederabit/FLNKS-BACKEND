@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run build && npm run copy-database && cp .env.production ./dist/src/ && cross-env NODE_ENV=production node dist/server.js",
     "start:dev": "cross-env NODE_ENV=development npx nodemon",
-    "build": "rimraf ./dist && tsc",
+    "build": "rimraf ./dist && npx tsc",
     "copy-database": "cp ./src/database/*.db ./dist/src/database/",
     "test": "cross-env NODE_ENV=test jest --runInBand"
   },
@@ -37,6 +37,7 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "nedb": "^1.8.0",
-    "rimraf": "^5.0.5"
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.3"
   }
 }
